@@ -3,11 +3,17 @@ body {
   margin:0;
   height: 100%;
   padding-top: 25px; 
+  background-color: #d6d6d6;
 }
 body {
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 400;
   overflow-x: hidden;
+}
+
+.box-post{
+  max-height: 330px;
+  overflow: auto;
 }
 
 img.bg {
@@ -33,113 +39,6 @@ img.bg {
   top:0;
   bottom:0;
   position:fixed;
-}
-
-.pad{
-  font-size: 12px;
-  padding: 15px;
-  background: #141414;
-  color: white;
-}
-.border-list{
-  border: 1px solid #8080802e;
-  background: #ffffff;
-  color: #5b5962;  
-}
-
-.tooltip-arrow,
-.red-tooltip + .tooltip > .tooltip-inner {background-color: white;}
-
-.price {
-  position: absolute;
-  right: -1px;
-  margin: -23px 2px 0px 0px;
-}
-.ml-price{
-  border-radius: 0;
-  color: #ebebeb;
-  background: rgba(39,59,89,.7);
-  font-size: 12px;
-  font-weight: 600;
-  height: 23px;
-  line-height: normal;
-  padding: 4px 2px 4px 4px;
-  text-align: left;
-  /* float: left; */
-  display: inline-block;
-}
-.rating-durasi {
-  position: absolute;
-  left: -1px;
-  margin: 0px 1px;
-}
-.ml-rating{
-  border-radius: 0;
-  color: #ebebeb;
-  background: rgba(39,59,89,.7);
-  font-size: 15px;
-  font-weight: 600;
-  height: 25px;
-  line-height: normal;
-  padding: 4px 2px 4px 4px;
-  text-align: left;
-  /* float: left; */
-  display: inline-block;
-}
-
-.not-post{
-  position: absolute;
-  top: 8px;
-  right: 0px;
-  border-radius: 10px;
-}
-
-.cont-im {
-  position: relative;
-  border: 2px solid #1e3d57;
-}
-
-.image-list {
-  opacity: 1;
-  display: block;
-  width: 100%;
-  height: 163px;
-  transition: .5s ease;
-  backface-visibility: hidden;
-}
-
-.image-list-detail {
-  opacity: 1;
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: .5s ease;
-  backface-visibility: hidden;
-}
-
-.middle {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.price-detail{
-  font-size: 30px;
-}
-.synopsis{
-  padding: 0px 0px 0px 20px;
-}
-.cont-im:hover .image-list {
-  opacity: 0.3;
-}
-
-.cont-im:hover .middle {
-  opacity: 1;
 }
 
 .ml-rating-detail{
@@ -181,7 +80,7 @@ img.bg {
 .wrapper {
   height: auto;
   position: relative;
-  overflow-x: hidden;
+  overflow-x: hidden;  
 /* overflow-y: auto; */
 }
 .wrapper:before,

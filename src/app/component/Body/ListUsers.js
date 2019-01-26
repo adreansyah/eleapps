@@ -1,0 +1,48 @@
+import React from 'react'; 
+export const Listusers = (props) =>{              
+    let {data,actions} = props;       
+    return(                                           
+        <div className="col-md-6">                                                                                                                                                                                             
+            <div className="box box-info">
+                <div className="box-header with-border">
+                    <h3 className="box-title"><i className="fa fa-users"></i> User Lists</h3>
+                </div>
+                <div className="box-body table-responsive box-post">
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Username</th>  
+                                <th>website</th>  
+                                <th>Button View</th>                                
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            {
+                                data.map((item, index) => {                                    
+                                    return(
+                                        <tr key={ index }>
+                                            <td>{ item.id }</td>
+                                            <td>{ item.name }</td>
+                                            <td>{ item.username }</td>  
+                                            <td>{ item.website }</td>                                     
+                                            <td width="30%" className="text-center">
+                                                <button onClick={()=> actions.HandleClickPost(item.id,item.name)} className="btn btn-sm margin btn-flat btn-info" data-toggle="tooltip" title="Check Post">
+                                                    <i className="fa fa-comment"></i>
+                                                </button>
+                                                <button onClick={()=> actions.HandleClickAlbums(item.id,item.name)} className="btn btn-sm margin btn-flat btn-success" data-toggle="tooltip" title="Check Albums">
+                                                    <i className="fa fa-folder"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>                                               
+                    </table>
+                </div>
+            </div>
+        </div>
+    )
+}

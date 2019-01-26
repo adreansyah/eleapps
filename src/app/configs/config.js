@@ -1,26 +1,37 @@
-export const DiscoverMovie  = async (counter) => {    
+import regeneratorRuntime from "regenerator-runtime";
+
+export const ListUsers = async () => {    
     const Api = {
-        URL:'https://api.themoviedb.org/3/discover/movie?api_key=b934e8458371646dbb237109a55738b1&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page='+counter+''
+        URL:'https://jsonplaceholder.typicode.com/users'
     }  
-    const rawResponse = await fetch(Api.URL, { data: { page: counter } });
+    const rawResponse = await fetch(Api.URL);
     const content = await rawResponse.json();
     return content;    
 }
 
-export const DetailMovie = async (counter) => {    
+export const PostbyUsers = async (counter) => {    
     const Api = {
-        URL:'https://api.themoviedb.org/3/movie/'+counter+'?api_key=b934e8458371646dbb237109a55738b1&language=en-US'
+        URL:`https://jsonplaceholder.typicode.com/posts?userId=${counter}`
     }  
-    const rawResponse = await fetch(Api.URL, { data: { page: counter } });
+    const rawResponse = await fetch(Api.URL);
     const content = await rawResponse.json();
-    return content; 
+    return content;    
 }
 
-export const SameDetail = async (counter) => {    
+export const AlbumsbyUsers = async (counter) => {    
     const Api = {
-        URL:'https://api.themoviedb.org/3/movie/'+counter+'/similar?api_key=b934e8458371646dbb237109a55738b1&language=en-US&page=1'
+        URL:`https://jsonplaceholder.typicode.com/Albums?userId=${counter}`
     }  
-    const rawResponse = await fetch(Api.URL, { data: { page: counter } });
+    const rawResponse = await fetch(Api.URL);
     const content = await rawResponse.json();
-    return content; 
+    return content;    
+}
+
+export const CommentbyPosts = async (counter) => {    
+    const Api = {
+        URL:`https://jsonplaceholder.typicode.com/comments?postId=${counter}`
+    }  
+    const rawResponse = await fetch(Api.URL);
+    const content = await rawResponse.json();
+    return content;    
 }
