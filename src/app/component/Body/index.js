@@ -28,6 +28,7 @@ class Body extends React.Component {
         this.HandleClickDetailPost   = this.HandleClickDetailPost.bind(this);
         this.HandleClickDetailAlbums = this.HandleClickDetailAlbums.bind(this);
         this.HandleClickAddPost      = this.HandleClickAddPost.bind(this);
+        this.HandleClickAddComment   = this.HandleClickAddComment.bind(this);
     }        
 
     componentWillMount(){
@@ -58,7 +59,7 @@ class Body extends React.Component {
                     <div className="col-md-12 col-md-offset3">
                         <div className="margin text-center">
                             <button onClick={()=>this.HandleClickAddPost()} className="margin btn btn-danger">Add Posting</button>
-                            <button className="margin btn btn-warning">Add Comment</button>
+                            <button onClick={()=>this.HandleClickAddComment()} className="margin btn btn-warning">Add Comment</button>
                         </div>                    
                     </div>                                                                                      
                     <Listusers data={data} actions={this} />                                                         
@@ -173,6 +174,13 @@ class Body extends React.Component {
         let {history} = this.props;                     
         history.push({
             pathname:'add',            
+        });     
+    }
+
+    HandleClickAddComment(){     
+        let {history} = this.props;                     
+        history.push({
+            pathname:'add-comment',            
         });     
     }
 

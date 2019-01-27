@@ -1,18 +1,18 @@
-import { ListUsers, PostbyUsers, AlbumsbyUsers, CommentbyPosts } from './configs/config';
+import { ListUsers, PostbyUsers, AlbumsbyUsers, CommentbyPosts } from './app/configs/config';
 import regeneratorRuntime from "regenerator-runtime";
 import "isomorphic-fetch";
 
 /**
  * Unit Testing Api list Users
  */
-test('Test List Users',() => {
+test('Test List Users should be json',() => {
     return ListUsers().then(data => {
     //   console.log(data);
       expect(data).toBe(data);    
     });
 });
 
-test('Asynchronous Test List Users', async () => {
+test('Asynchronous Test List Users should be json', async () => {
     // console.log(await expect(ListUsers()).resolves)
     await expect(ListUsers()).resolves;
 });
@@ -24,14 +24,14 @@ test('Asynchronous Test List Users', async () => {
  /**
  * Unit Testing Api Post By Users
  */
-test('Test Post by User ',() => {
+test('Test Post by User should be json',() => {
     return PostbyUsers(10).then(data => {
     //   console.log(data);
       expect(data).toBe(data);    
     });
 });
 
-test('Asynchronous Test Post by User', async () => {
+test('Asynchronous Test Post by User should be Promise', async () => {
     // console.log(await expect(PostbyUsers(1)).resolves)
     await expect(PostbyUsers(1)).resolves;
 });
@@ -43,14 +43,14 @@ test('Asynchronous Test Post by User', async () => {
   /**
  * Unit Testing Api Albums By Users
  */
-test('Test Albums by User ',() => {
+test('Test Albums by User should be json',() => {
     return AlbumsbyUsers(10).then(data => {
     //   console.log(data);
       expect(data).toBe(data);    
     });
 });
 
-test('Asynchronous Test Albums by User', async () => {
+test('Asynchronous Test Albums by User should be promise', async () => {
     // console.log(await expect(PostbyUsers(1)).resolves)
     await expect(AlbumsbyUsers(1)).resolves;
 });
@@ -61,14 +61,14 @@ test('Asynchronous Test Albums by User', async () => {
    /**
  * Unit Testing Api Albums By Users
  */
-test('Test Comment by Post ',() => {
+test('Test Comment by Post should be json',() => {
     return CommentbyPosts(10).then(data => {
     //   console.log(data);
       expect(data).toBe(data);    
     });
 });
 
-test('Asynchronous Test Comment by Post', async () => {
+test('Asynchronous Test Comment by Post should be promise', async () => {
     // console.log(await expect(CommentbyPosts(1)).resolves)
     await expect(CommentbyPosts(1)).resolves;
 });

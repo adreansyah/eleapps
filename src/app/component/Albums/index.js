@@ -53,7 +53,7 @@ class Albums extends React.Component {
                                             <div className="loader text-center"><MDSpinner/></div>:                                                                                                                             
                                             data.map((item,index)=>{                                                
                                                 return(
-                                                    <img key={index} onClick={() => this.setState({ isOpen: true })} src={item.thumbnailUrl} alt="..." className="margin-x cursor"/>                                            
+                                                    <img key={index} onClick={() => this.setState({ isOpen: true })} src={item.thumbnailUrl} alt="..." className="margin-x img-bordered cursor"/>                                            
                                                 )
                                             })
                                         }

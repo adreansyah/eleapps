@@ -1,9 +1,9 @@
 import React from 'react'; 
-import { ListUsers, AddPostUsers, EditPostUsers, DeletePostUsers, ListPostUsers } from '../../configs/config';
+import { ListPostUsers, ListComments, AddPostComments, EditPostComments, DeletePostComments } from '../../configs/config';
 import { AddPost } from './Postadd';
 import { ReadPost } from './Postread';
 
-class Postcrud extends React.Component {
+class Postcomment extends React.Component {
     constructor(){
         super();
         this.state = {   
@@ -11,8 +11,7 @@ class Postcrud extends React.Component {
             control:'',               
             userData:[],
             postData:[],            
-        }
-        this.title  = React.createRef();
+        }        
         this.body   = React.createRef();
         this.select = React.createRef();
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,15 +20,15 @@ class Postcrud extends React.Component {
         this.handleCancel = this.handleCancel.bind(this);
         this.handleSubmitEdit   = this.handleSubmitEdit.bind(this);
         this.handleSubmitDelete = this.handleSubmitDelete.bind(this);
-    }          
+    }      
 
-    render(){          
-        let {userData,postData} = this.state            
+    render(){        
+        let {userData,postData} = this.state                   
         return (
             <section className="content">
                 <div className="row">     
                     <AddPost  data={userData} actions={this}/>
-                    <ReadPost data={postData} actions={this}/>                   
+                    <ReadPost data={postData} actions={this}/>
                 </div>
             </section>
         )                    
@@ -37,62 +36,56 @@ class Postcrud extends React.Component {
 
     handleSubmit(event){        
         event.preventDefault();           
-        let userId = this.select.current.value,
-            title  = this.title.current.value,
-            body   = this.body.current.value,
-            parameter = JSON.stringify({
-                title: title,
+        let postId = this.select.current.value,            
+            body   = this.body.current.value,            
+            parameter = JSON.stringify({                               
                 body: body,
-                userId: userId
-            });         
-        AddPostUsers(parameter).then(()=>{
+                postId: postId
+            });    
+        console.log(parameter);
+        AddPostComments(parameter).then(()=>{
             this.handleRead();
-            this.select.current.value = 1;
-            this.title.current.value  = '';
+            this.select.current.value = 1;            
             this.body.current.value   = ''; 
         })        
     }    
 
     handleRead(){     
-        ListPostUsers().then((res) => { 
+        ListComments().then((res) => { 
             this.setState(() => ({
                 postData:res
             }))
         });       
     }
 
-    handleEdit(id,userId,title,body){     
+    handleEdit(id,postId,body){             
         this.setState(() => ({
             control:'Edit',
             id:id
         }));
-        this.select.current.value = userId;
-        this.title.current.value  = title;
+        this.select.current.value = postId;        
         this.body.current.value   = body;        
     }
 
     handleSubmitEdit(event){               
-        event.preventDefault();          
-        let userId = this.select.current.value,
-            title  = this.title.current.value,
+        event.preventDefault();              
+        let postId = this.select.current.value,            
             body   = this.body.current.value,
             id     = this.state.id,
             parameter = JSON.stringify({
-                id:id,
-                title: title,
+                id:id,              
                 body: body,
-                userId: userId
-            });  
-        EditPostUsers(parameter,id).then((res)=>{
+                postId: postId
+            });                               
+        EditPostComments(parameter,id).then((res)=>{
             this.handleRead();
         })        
     }
 
     handleSubmitDelete(id){                                                             
-        DeletePostUsers(id).then((res)=>{
+        DeletePostComments(id).then((res)=>{
             this.handleRead();
-            this.select.current.value = 1;
-            this.title.current.value  = '';
+            this.select.current.value = 1;            
             this.body.current.value   = ''; 
         })
     }
@@ -101,14 +94,13 @@ class Postcrud extends React.Component {
         this.setState(() => ({           
             control:'Add'
         }))
-        this.select.current.value = 1;
-        this.title.current.value  = '';
+        this.select.current.value = 1;        
         this.body.current.value   = ''; 
     }
     
     componentDidMount(){
         this.handleRead();
-        ListUsers().then((res)=>{
+        ListPostUsers().then((res)=>{
             this.setState(() => ({
                 userData:res,
                 control:'Add'
@@ -117,4 +109,4 @@ class Postcrud extends React.Component {
     }  
 }
 
-export default Postcrud;
+export default Postcomment;

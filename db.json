@@ -1,17 +1,41 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "Fooser",
-      "body": "Barstor",
-      "userId": "1"
+      "title": "Highcharts Stock Demo",
+      "body": "lorem ipsum dolor sit amet que zuka dolor",
+      "userId": "2",
+      "id": 1
+    },
+    {
+      "title": "Highcharts Stock Demo",
+      "body": "lorem ipsum dolor sit amet que zuka dolor",
+      "userId": "1",
+      "id": 2
+    },
+    {
+      "title": "Highcharts Stock Demo",
+      "body": "lorem ipsum dolor sit amet que zuka dolor",
+      "userId": "3",
+      "id": 3
+    },
+    {
+      "title": "Highcharts Stock Demo",
+      "body": "lorem ipsum dolor sit amet que zuka dolor",
+      "userId": "5",
+      "id": 4
+    },
+    {
+      "title": "Highcharts Stock Demo",
+      "body": "bars",
+      "userId": "3",
+      "id": 5
     }
   ],
   "comments": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "body": "Highcharts Stock Demo",
+      "postId": "1",
+      "id": 1
     }
   ],
   "profile": {

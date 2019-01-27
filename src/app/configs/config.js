@@ -1,9 +1,11 @@
 import regeneratorRuntime from "regenerator-runtime";
 
-let LocalUri = 'http://localhost:3000';
+let LocalUri = 'http://localhost:3000',
+    exterUri = 'https://jsonplaceholder.typicode.com';
+
 export const ListUsers = async () => {    
     const Api = {
-        URL:'https://jsonplaceholder.typicode.com/users'
+        URL:`${exterUri}/users`
     }  
     const rawResponse = await fetch(Api.URL);
     const content = await rawResponse.json();
@@ -12,7 +14,7 @@ export const ListUsers = async () => {
 
 export const PostbyUsers = async (counter) => {    
     const Api = {
-        URL:`https://jsonplaceholder.typicode.com/posts?userId=${counter}`
+        URL:`${exterUri}/posts?userId=${counter}`
     }  
     const rawResponse = await fetch(Api.URL);
     const content = await rawResponse.json();
@@ -21,7 +23,7 @@ export const PostbyUsers = async (counter) => {
 
 export const AlbumsbyUsers = async (counter) => {    
     const Api = {
-        URL:`https://jsonplaceholder.typicode.com/Albums?userId=${counter}`
+        URL:`${exterUri}/Albums?userId=${counter}`
     }  
     const rawResponse = await fetch(Api.URL);
     const content = await rawResponse.json();
@@ -30,7 +32,7 @@ export const AlbumsbyUsers = async (counter) => {
 
 export const CommentbyPosts = async (counter) => {    
     const Api = {
-        URL:`https://jsonplaceholder.typicode.com/comments?postId=${counter}`
+        URL:`${exterUri}/comments?postId=${counter}`
     }  
     const rawResponse = await fetch(Api.URL);
     const content = await rawResponse.json();
@@ -39,7 +41,7 @@ export const CommentbyPosts = async (counter) => {
 
 export const AlbumsPost = async (counter) => {    
     const Api = {
-        URL:`https://jsonplaceholder.typicode.com/photos?albumId=${counter}`
+        URL:`${exterUri}/photos?albumId=${counter}`
     }  
     const rawResponse = await fetch(Api.URL);
     const content = await rawResponse.json();
@@ -78,11 +80,53 @@ export const DeletePostUsers = async(id)=>{
     return content;    
 }
 
+
 export const ListPostUsers = async (counter) => {    
     const Api = {
         URL:`${LocalUri}/posts`
     }  
     const rawResponse = await fetch(Api.URL);
+    const content = await rawResponse.json();
+    return content;    
+}
+
+export const ListComments = async (counter) => {    
+    const Api = {
+        URL:`${LocalUri}/comments`
+    }  
+    const rawResponse = await fetch(Api.URL);
+    const content = await rawResponse.json();
+    return content;    
+}
+
+export const AddPostComments = async(jsonData)=>{
+    const rawResponse = await fetch(`${LocalUri}/comments`, { 
+        method: 'POST',
+        body: jsonData, 
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    });
+    const content = await rawResponse.json();
+    return content;    
+}
+
+export const EditPostComments = async(jsonData,id)=>{
+    const rawResponse = await fetch(`${LocalUri}/comments/${id}`, { 
+        method: 'PUT',
+        body: jsonData, 
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    });
+    const content = await rawResponse.json();
+    return content;    
+}
+
+export const DeletePostComments = async(id)=>{
+    const rawResponse = await fetch(`${LocalUri}/comments/${id}`, { 
+        method: 'DELETE',        
+    });
     const content = await rawResponse.json();
     return content;    
 }
