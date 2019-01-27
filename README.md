@@ -43,7 +43,7 @@ $ cd eleapps/
 Start React Apps
 ```sh
 $ cd eleapps/
-$ npm install 
+$ sudo npm install 
 $ npm start
 ```
 Now you can open link http://localhost:8080.
@@ -52,7 +52,7 @@ Now you can open link http://localhost:8080.
 
 Install JSON Server for execution Fake RestFull API.
 ```sh
-npm install -g json-server
+sudo npm install -g json-server
 ```
 Create a db.json file with some data
 ```json
