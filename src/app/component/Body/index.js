@@ -1,7 +1,10 @@
 import React from 'react'; 
+import MDSpinner from "react-md-spinner";
 import { ListUsers, PostbyUsers, AlbumsbyUsers, CommentbyPosts } from '../../configs/config';
-import { Listusers }    from './ListUsers';
-import { Listeachpost } from './Listeachpost';
+import { Replacingstring }from '../../configs/MainFunctions'; 
+import { Listusers }      from './ListUsers';
+import { Listeachpost }   from './Listeachpost';
+import { Listcomments }   from './Listcomments';
 import { Listeachalbums } from './Listeachalbums';
 
 class Body extends React.Component {
@@ -13,11 +16,18 @@ class Body extends React.Component {
             albums:{},
             comment:{},
             showpost:false,
-            showalbums:false,    
+            showalbums:false, 
+            showcomments:false, 
+            loading:true, 
+            loadingpost:false,
+            loadingalbums:false,      
+            indikator:false,         
         };                    
-        this.HandleClickPost       = this.HandleClickPost.bind(this);
-        this.HandleClickAlbums     = this.HandleClickAlbums.bind(this);
-        this.HandleClickDetailPost = this.HandleClickDetailPost.bind(this);
+        this.HandleClickPost         = this.HandleClickPost.bind(this);
+        this.HandleClickAlbums       = this.HandleClickAlbums.bind(this);
+        this.HandleClickDetailPost   = this.HandleClickDetailPost.bind(this);
+        this.HandleClickDetailAlbums = this.HandleClickDetailAlbums.bind(this);
+        this.HandleClickAddPost      = this.HandleClickAddPost.bind(this);
     }        
 
     componentWillMount(){
@@ -28,58 +38,112 @@ class Body extends React.Component {
         console.log('Unmounting component From DOM')        
     }
 
-    render() {                                                             
+    render() {                                                                     
         let { 
             data,
             post,
             albums,
             comment,
             showpost,
-            showalbums
-        } = this.state;                   
+            showalbums,
+            showcomments,        
+            loadingpost,
+            loadingalbums,
+            indikator
+        } = this.state;       
+        console.log(indikator);                           
         return (
             <section className="content">                      
-                <div className="row margin">                                                                                                  
-                    <Listusers data={data} actions={this} />  
+                <div className="row">            
+                    <div className="col-md-12 col-md-offset3">
+                        <div className="margin text-center">
+                            <button onClick={()=>this.HandleClickAddPost()} className="margin btn btn-danger">Add Posting</button>
+                            <button className="margin btn btn-warning">Add Comment</button>
+                        </div>                    
+                    </div>                                                                                      
+                    <Listusers data={data} actions={this} />                                                         
                     {
-                        (showpost === false)?'':<Listeachpost data={post} actions={this}/>                                             
+                        (indikator === true)?<Indikator/>:''
+                    }
+                    {
+                        (loadingpost === true)?
+                        <div className="col-md-6">
+                        <div className="loader text-center"><MDSpinner/></div></div>:
+                        (showpost === false)?'':                        
+                        <Listeachpost data={post} actions={this}/>                                             
                     }                                                       
                     {
-                        (showalbums === false)?'':<Listeachalbums data={albums} />
-                    }                              
-                    <ListComments data={comment}/>                      
+                        (loadingalbums === true)?
+                        <div className="col-md-6">
+                        <div className="loader text-center"><MDSpinner/></div></div>:
+                        (showalbums === false)?'':
+                        <Listeachalbums data={albums} actions={this} />
+                    } 
+                    {
+                        (showcomments === false)?'':
+                        <Listcomments data={comment}/>
+                    }                                                                       
                 </div>                       
             </section>
         )
     }
 
-    HandleClickPost(id,username){       
-        PostbyUsers(id).then((res) => this.setState(
-            {
+    HandleClickPost(id,username){   
+        let {history} = this.props;                
+        history.push({            
+            search: `?user-post=${id}`,
+        });
+        this.setState(function(previousState) {
+            return {               
+                showpost:true,  
+                showalbums:false,  
+                showcomments:false, 
+                loadingpost: !previousState.loadingpost,
+                indikator:false
+            };
+        });              
+        PostbyUsers(id).then((res) => setTimeout(() => { 
+            this.setState(() => ({
                 post:{
                     data:res,
                     name:username
-                }, 
-                showpost:true,  
-                showalbums:false,                                  
-            }
-        ));        
+                },                   
+                loadingpost: false
+            }))
+        },2000));                
     }
 
-    HandleClickAlbums(id,username){       
-        AlbumsbyUsers(id).then((res) => this.setState(
-            {
+    HandleClickAlbums(id,username){  
+        let {history} = this.props;        
+        history.push({          
+            search: `?user-albums=${id}`,
+        });
+        this.setState(function(previousState) {
+            return {               
+                showpost:false, 
+                showalbums:true, 
+                showcomments:false, 
+                loadingalbums: !previousState.loadingalbums,
+                indikator:false
+            };
+        });      
+
+        AlbumsbyUsers(id).then((res) => setTimeout(() => { 
+            this.setState(() => ({
                 albums:{
                     data:res,
                     name:username
-                }, 
-                showpost:false, 
-                showalbums:true,                                   
-            }
-        ));        
+                },               
+                loadingalbums:false 
+            }))
+        },2000));               
     }
 
-    HandleClickDetailPost(id,title,body,name){               
+    HandleClickDetailPost(id,title,body,name){   
+        let {history} = this.props;                     
+        history.push({          
+            search: `?user-detail-post=${id}`,
+        });              
         CommentbyPosts(id).then((res) => this.setState(
             {
                 comment:{
@@ -87,44 +151,49 @@ class Body extends React.Component {
                     title:title,
                     body:body,
                     name:name
-                },                                                
+                },     
+                showcomments:true,                                            
             }
         ));                      
     }
 
-    componentDidMount(){      
-        ListUsers().then((res) => this.setState(
-            {
-                data: res,                                    
+    HandleClickDetailAlbums(id,name){               
+        let {history} = this.props;                     
+        history.push({
+            pathname:'albums',          
+            search: `?${Replacingstring(name)}=${id}`,
+            state: { 
+                id: id,
+                name: name
             }
-        ));               
+        });               
+    }
+
+    HandleClickAddPost(){     
+        let {history} = this.props;                     
+        history.push({
+            pathname:'add',            
+        });     
+    }
+
+    componentDidMount(){      
+        ListUsers().then((res) => setTimeout(() => { 
+            this.setState(() => ({
+                data:res,
+                loading: false,
+                indikator:true
+            }))
+        },2000));                     
     }
 }
 
-const ListComments = (props) =>{
-    let {
-        data,       
-        name,
-        title,
-        body
-    } = props.data;         
-    console.log(props);
-    return (
-        <div className="col-md-8 col-md-offset-2">
-            <div className="box box-widget">
-                <div className="box-header with-border">
-                    <div className="user-block">
-                        <img className="img-circle" src="https://randomuser.me/api/portraits/lego/7.jpg" alt="User Image"/>
-                        <span className="username">{name}</span>
-                        <span className="description">Shared publicly - 7:30 PM Today</span>
-                    </div>
-                </div>
-                <div className="box-body">
-                    <p>{ title }</p>
-                    <p>{ body }</p>
-                </div>
-                <div className="box-footer box-comments">
-                    
+const Indikator =()=>{
+    return(
+        <div className="col-md-6">
+            <div className="border-indicator">
+                <div className="center-indikator">
+                    <p>Welcome !!!</p>
+                    <p>Click Button View To Show Detail</p>
                 </div>
             </div>
         </div>

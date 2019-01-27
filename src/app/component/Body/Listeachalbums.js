@@ -4,6 +4,7 @@ export const Listeachalbums = (props)=>{
         data,
         name
     } = props.data; 
+    let {actions} = props;
     return(
         <div className="col-md-6">
             <div className="box box-success">
@@ -17,14 +18,17 @@ export const Listeachalbums = (props)=>{
                         </li>
                         {
                             (data === undefined)?false:                            
-                            data.map((item,index)=>{
+                            data.map((item,index)=>{                                
                                 return (
                                     <li key={index}>
                                         <i className="fa fa-folder bg-olive"></i>
                                         <div className="timeline-item">                                            
                                             <h3 className="timeline-header"><b>Albums</b></h3>
                                             <div className="timeline-body">{item.title}</div>
-                                        </div>
+                                            <div className="timeline-footer">
+                                                <button onClick={()=>actions.HandleClickDetailAlbums(item.userId,name)} className="btn btn-success btn-xs">Click Albums !!!</button>
+                                            </div>
+                                        </div>                                        
                                     </li>
                                 )
                             })

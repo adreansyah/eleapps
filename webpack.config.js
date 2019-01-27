@@ -39,7 +39,7 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js', 
     contentBase: './dist',
-    // historyApiFallback: true,
+    historyApiFallback: true,
     hot: true
   },
   // externals: {

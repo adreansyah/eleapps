@@ -29,7 +29,7 @@ export const Listeachpost = (props) =>{
                                                 {item.body}                                                
                                             </div>
                                             <div className="timeline-footer">
-                                                <button onClick={()=> actions.HandleClickDetailPost(item.id,item.title,item.body,name)} className="btn btn-primary btn-xs">Read more</button>
+                                                <button onClick={()=> actions.HandleClickDetailPost(item.id,item.title,item.body,name)} className="btn btn-primary btn-xs">Click Detail !!!</button>
                                             </div>
                                         </div>
                                     </li>

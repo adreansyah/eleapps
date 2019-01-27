@@ -1,6 +1,10 @@
 import React from 'react'; 
+import MDSpinner from "react-md-spinner";
+
 export const Listusers = (props) =>{              
-    let {data,actions} = props;       
+    let {data,actions} = props; 
+    let {loading} = actions.state;  
+    // console.log(loading);    
     return(                                           
         <div className="col-md-6">                                                                                                                                                                                             
             <div className="box box-info">
@@ -8,14 +12,16 @@ export const Listusers = (props) =>{
                     <h3 className="box-title"><i className="fa fa-users"></i> User Lists</h3>
                 </div>
                 <div className="box-body table-responsive box-post">
-                    <table className="table table-striped">
+                {
+                    (loading=== true)?<div className="text-center"><MDSpinner/></div>
+                    :<table className="table table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Username</th>  
                                 <th>website</th>  
-                                <th>Button View</th>                                
+                                <th className="text-center">Button View</th>                                
                             </tr>
                         </thead> 
                         <tbody>
@@ -41,6 +47,7 @@ export const Listusers = (props) =>{
                             }
                         </tbody>                                               
                     </table>
+                }                    
                 </div>
             </div>
         </div>
