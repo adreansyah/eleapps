@@ -24,8 +24,8 @@ The tech, i used the folowing:
 * ReactJS - Modern Javascript for web apps!
 * Bootstrap - Css framework.
 * Webpack 4 - Web Dev Server.
-* Node V8
-* npm 3.5.2
+* Node v11.8.0
+* npm 6.7.0
 * Eslint - Linter the rules for code.
 * Jest - Unit Testing React.
 * Json Server - Get Fake REST API, i used for CRUD.

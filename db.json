@@ -29,6 +29,12 @@
       "body": "bars",
       "userId": "3",
       "id": 5
+    },
+    {
+      "title": "Foos",
+      "body": "bars",
+      "userId": "9",
+      "id": 6
     }
   ],
   "comments": [
