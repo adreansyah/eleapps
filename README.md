@@ -79,7 +79,8 @@ Create a db.json file with some data
 ```
 Start JSON Server
 ```sh
-json-server --watch db.json
+$ cd eleapps/
+$ json-server --watch db.json
 ```
 Now you can open link http://localhost:3000/post.
 
